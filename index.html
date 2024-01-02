@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta http-equal="X-UA-Compitable" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>stopWatch</title>
+        <link rel="stylesheet" href="style.css">
+        
+            
+
+        
+    </head>
+    <body>
+        <div class="container">
+            <div class="result">
+                <span id="hours">00</span>:
+                <span id="minutes">00</span>:
+                <span id="seconds">00</span>:
+                <span id="miliseconds">00</span>
+            </div>
+            <div class="button">
+                <button id="start">Start</button>
+                <button id="stop">Stop</button>
+                <button id="reset">Reset</button>
+            </div>
+        </div>
+
+        <script>
+            let hours ="00";
+            let minutes = "00";
+            let seconds = "00";
+            let miliseconds = "00";
+            let interval;
+
+            const hourscontainer = document.getElementById("hours");
+            const minutescontainer = document.getElementById("minutes");
+            const secondscontainer = document.getElementById("seconds");
+            const milisecondscontainer = document.getElementById("miliseconds");
+            const start = document.getElementById("start");
+            const stop = document.getElementById("stop");
+            const reset = document.getElementById("reset");
+
+            const startTimer = () =>{
+                clearInterval(interval);
+                interval = setInterval(startWatch, 10);
+            }
+
+            const stopTimer = () =>{
+                clearInterval(interval);
+            }
+
+            const resetTimer = () =>{
+                miliseconds = 0;
+                seconds = 0;
+                minutes = 0;
+                hours = 0;
+
+
+                milisecondscontainer.innerHTML = "00";
+                secondscontainer.innerHTML = "00";
+                minutescontainer.innerHTML = "00";
+                hourscontainer.innerHTML = "00";
+                clearInterval(interval);
+            }
+
+            function startWatch (){
+                miliseconds++;
+                if(miliseconds < 9){
+                    milisecondscontainer.innerHTML = '00';
+                }
+                else if(miliseconds > 99){
+                    miliseconds = 0;
+                    milisecondscontainer.innerHTML = "00";
+                    seconds++;
+                }
+                else{
+                    milisecondscontainer.innerHTML = miliseconds;
+                }
+
+                if(seconds > 10){
+                    secondscontainer.innerHTML = '00';
+                }
+                else if(seconds < 59){
+                    minutes++;
+                    seconds = 0;
+                    secondscontainer.innerHTML ='00';
+                }
+                else{
+                    secondscontainer.innerHTML = seconds;
+                }
+
+                if(minutes < 10){
+                    milisecondscontainer.innerHTML = '00';
+                }
+                else if(minutes > 59){
+                    hours++;
+                    minutes = 0;
+                    minutescontainer.innerHTML = minutes;
+                }
+                else{
+                    minutescontainer.innerHTML = minutes;
+                }
+
+                if(hours < 10){
+                    hourscontainer.innerHTML = '00';
+                }
+                else{
+                    hourscontainer.innerHTML = hours;
+                }
+
+                
+
+            }
+
+            start.addEventListener("click", startTimer);
+            stop.addEventListener("click", stopTimer);
+            reset.addEventListener("click", resetTimer);
+
+        </script>
+        
+    
+        
+
+    </body>
+</html>
+    
+        
+
+
+    
+
+    
+
